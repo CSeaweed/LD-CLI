@@ -26,6 +26,16 @@ int print_buffer(int *length)
     printf(" ");
   }
 }
+// Credit: https://stackoverflow.com/a/12642749
+int get_columns()
+{
+  CONSOLE_SCREEN_BUFFER_INFO csbi;
+  int columns;
+  GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+  columns = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+  return columns;
+}
+
 // Don't worry of all attributes, they figure themselves out
 void enter_vehicle(int *width, int *height, char arr[][*width], int *distance, int *rate)
 {
@@ -102,15 +112,18 @@ int main()
                      " ____/_____|___ \\___ ",
                      "0    _   -     _   ,*",
                      " '--(_)-------(_)--' "};
-  int distance = 55; // Total travel distance after entry
+  int columns = get_columns(); // Makes travel distance dynamic
   int width = len(sizeof(lada[0])); // Don't modify, will fix itself when modifying vehicle according to instructions
   int height = sizeof(lada) / width; // Same as above
+  int distance = columns - width - 1; // Fixing distance to avoid sketchy looking vehicle 
   int rate = 25; // New "frame" delay in milliseconds
-
+  
   enter_vehicle(&width, &height, lada, &distance, &rate);
   drive_vehicle(&width, &height, lada, &distance, &rate);
   evict_vehicle(&width, &height, lada, &rate);
   // Eviction does not require buffer thus int 'distance' is not needed
+
+  return 0;
 }
 
 
