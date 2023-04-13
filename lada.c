@@ -3,7 +3,10 @@
 #include <Windows.h>
 
 // I just wanted a length function (High-level fan here)
-int len(int size)
+
+// This could've been used for both integers and chars but since
+// only chars are needed here this reduces the required params
+int char_len(int size)
 {
   return size/sizeof(char);
 }
@@ -95,6 +98,7 @@ int main()
   enter_vehicle(&width, &height, lada, &distance, &rate);
   drive_vehicle(&width, &height, lada, &distance, &rate);
   evict_vehicle(&width, &height, lada, &rate);
+  // Eviction does not require buffer thus int 'distance' is not needed
 }
 
 
