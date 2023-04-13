@@ -6,10 +6,18 @@
 
 // This could've been used for both integers and chars but since
 // only chars are needed here this reduces the required params
-int char_len(int size)
+int len(int size)
 {
   return size/sizeof(char);
 }
+
+// Alternative len() function
+//
+// int len(int size, void * arr)
+// {
+//    return size/sizeof(arr[0])
+// }
+
 // Printing buffer for moving "animation"
 int print_buffer(int *length) 
 {
@@ -38,7 +46,7 @@ void enter_vehicle(int *width, int *height, char arr[][*width], int *distance, i
       }
       printf("\n");
     }
-  }§
+  }
 }
 
 void drive_vehicle(int *width, int *height, char arr[][*width], int *distance, int *rate)
@@ -93,7 +101,7 @@ int main()
   char lada[][22] = {"      .--------.     ",
                      " ____/_____|___ \\___ ",
                      "0    _   -     _   ,*",
-                     " '--(_)-------(_)--' ",};
+                     " '--(_)-------(_)--' "};
   int distance = 55; // Total travel distance after entry
   int width = len(sizeof(lada[0])); // Don't modify, will fix itself when modifying vehicle according to instructions
   int height = sizeof(lada) / width; // Same as above
