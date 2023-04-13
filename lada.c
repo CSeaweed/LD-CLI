@@ -38,18 +38,22 @@ void enter_vehicle(int *width, int *height, char arr[][*width], int *distance, i
       }
       printf("\n");
     }
-  }
+  }§
 }
 
 void drive_vehicle(int *width, int *height, char arr[][*width], int *distance, int *rate)
 { 
-  // Using trav to reduce buffer length
+  // int 'trav' is used later to reduce buffer length
   for (int trav = 0; trav < *distance; trav++)
   {
     Sleep(*rate);
     system("cls");
-    int buffer = *distance - trav; // Adjusting buffer between every frame
+    // Adjusting buffer between every frame for movement reasons
+    int buffer = *distance - trav; 
     // Literally just 2D array printing from down here, no magic
+
+    // One line of the vehicle is printed at a time since buffer
+    // needs to be printed separately for evely line
     for (int vert = 0; vert < *height; vert++)
     {
       print_buffer(&buffer);
